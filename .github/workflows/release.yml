@@ -31,8 +31,10 @@ jobs:
             cp .env.example .env
           fi
 
-      - name: Make Gradle Wrapper Executable
+      - name: Regenerate Gradle Wrapper
         run: |
+          # Rebuild the wrapper jar to prevent any git-corruption or line-ending translation issues
+          gradle wrapper
           sed -i -e 's/\r$//' gradlew
           chmod +x gradlew
 
