@@ -1,0 +1,6 @@
+{
+  "name": "KiranaSync",
+  "description": "KiranaSync is an Indian-market focused grocery and pantry tracker.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
