@@ -85,10 +85,21 @@ jobs:
           path: build-artifacts/
           if-no-files-found: error
 
+      - name: Determine Tag Name
+        id: tag_identifier
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+            TAG_NAME="${{ github.ref_name }}"
+          else
+            TAG_NAME="v1.0.${{ github.run_number }}"
+          fi
+          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/v')
         with:
+          tag_name: ${{ steps.tag_identifier.outputs.tag }}
+          name: "KiranaSync Release ${{ steps.tag_identifier.outputs.tag }}"
           files: |
             build-artifacts/*.apk
           draft: false
