@@ -32,7 +32,9 @@ jobs:
           fi
 
       - name: Make Gradle Wrapper Executable
-        run: chmod +x gradlew
+        run: |
+          sed -i -e 's/\r$//' gradlew
+          chmod +x gradlew
 
       - name: Decode Debug Keystore
         run: |
